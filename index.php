@@ -37,7 +37,7 @@ if (!isset($_SESSION['username'])) {
         <a href="#training-form">Start training</a>
       </li>
       <li>
-        <a href="#stats">Statistics</a>
+        <a href="#training-filter">Statistics</a>
       </li>
     </ul>
 
@@ -183,7 +183,60 @@ if (!isset($_SESSION['username'])) {
     <div id="message" class="message"></div>
 
   </section>
+
+  <!-- STATISTICS -->
+  <section id="training-filter">
+    <h2 id="training-header">Training <span>Data</span></h2>
+    <form id="filter-form">
+      <label for="month">Month:</label>
+      <select id="month" name="month" required>
+        <option value="" disabled selected>Select month</option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+
+      <label for="year">Year:</label>
+      <select id="year" name="year" required>
+        <option value="" disabled selected>Select year</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- Section for Displaying Data -->
+  <section id="training-data" class="training-data">
+    <?php if (!empty($training_data)): ?>
+      <section class="training-data">
+        <h2>Training Data for <?php echo htmlspecialchars($month) . '/' . htmlspecialchars($year); ?></h2>
+        <?php foreach ($training_data as $week => $exercises): ?>
+          <h3>Week <?php echo htmlspecialchars($week); ?></h3>
+          <ul>
+            <?php foreach ($exercises as $type => $total_reps): ?>
+              <li><?php echo htmlspecialchars($type); ?>: <?php echo htmlspecialchars($total_reps); ?> reps</li>
+            <?php endforeach; ?>
+          </ul>
+        <?php endforeach; ?>
+      </section>
+    <?php endif; ?>
+  </section>
+
+
   <script src="js/script.js"></script>
+  <script src="js/statistics.js"></script>
+
 </body>
 
 </html>
