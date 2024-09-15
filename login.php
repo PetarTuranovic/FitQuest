@@ -1,15 +1,15 @@
 <?php
-session_start(); // Pokretanje sesije
+session_start(); // START NEW SESSION
 
-// Povezivanje sa bazom podataka
+// DB CONNECTION
 $host = 'localhost';
 $dbname = 'fitquest';
-$username = 'root'; 
-$password = ''; 
+$username = 'root';
+$password = '';
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
-// Provera povezivanja sa bazom
+// DB CONNECTION CHECK
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -18,17 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['username'];
     $pass = $_POST['password'];
 
-    // Pretraga korisnika po username
+    // USERNAME SEARCH
     $sql = "SELECT * FROM users WHERE username='$user'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
 
-        // Provera lozinke
+        // PASSWORD CHECK
         if (password_verify($pass, $row['password'])) {
-            $_SESSION['username'] = $user; // Čuvanje korisničkog imena u sesiji
-            header("Location: index.php"); // Redirekcija na glavnu stranicu
+            $_SESSION['username'] = $user; // STORING USERNAME IN SESSION
+            header("Location: index.php"); // REDIRECT TO index.php
             exit();
         } else {
             echo "Invalid password!";
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-<!-- HTML forma za login -->
+<!-- HTML LOGIN FORM -->
 <form method="POST" action="login.php">
     <label for="username">Username:</label><br>
     <input type="text" id="username" name="username" required><br><br>

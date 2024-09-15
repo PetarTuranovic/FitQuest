@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Provera da li je korisnik prijavljen
+// USER LOGIN CHECK
 if (!isset($_SESSION['username'])) {
-  header("Location: login.php"); // Ako nije prijavljen, preusmeri na login
+  header("Location: login.php"); // IF NOT, REDIRECT TO LOGIN
   exit();
 }
 ?>

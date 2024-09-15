@@ -1,24 +1,24 @@
 <?php
-// Povezivanje sa bazom podataka
+// DB CONNECTION
 $host = 'localhost';
 $dbname = 'fitquest';
-$username = 'root'; // tvoj phpMyAdmin username
-$password = ''; // tvoja phpMyAdmin lozinka
+$username = 'root';
+$password = '';
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
-// Proveri da li je povezan
+// CONNECTION CHECK
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Provera da li je formu poslao POST metod
+// POST METHOD CHECK
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $weight = $_POST['weight'];
-    $pass = password_hash($_POST['password'], PASSWORD_DEFAULT); // Enkripcija lozinke
+    $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // SQL upit za unos podataka
+    // SQL FOR DATA INPUT
     $sql = "INSERT INTO users (username, password, weight) VALUES ('$username', '$pass', '$weight')";
 
     if ($conn->query($sql) === TRUE) {
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-<!-- HTML forma za registraciju -->
+<!-- HTML REGISTER FORM -->
 <form method="POST" action="register.php">
     <label for="username">Username:</label><br>
     <input type="text" id="username" name="username" required><br><br>

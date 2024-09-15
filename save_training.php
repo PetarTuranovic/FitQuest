@@ -2,21 +2,21 @@
 session_start();
 
 var_dump($_SESSION);
-// Proveri da li je korisnik ulogovan
+// USER LOGIN CHECK
 if (!isset($_SESSION['userid'])) {
     header("Location: login.php");
     exit();
 }
 
-// Povezivanje sa bazom podataka
+// DB CONNECTION
 $host = 'localhost';
 $dbname = 'fitquest';
-$username = 'root'; // Postavi prema tvojoj konfiguraciji
+$username = 'root';
 $password = '';
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
-// Proveri da li je veza uspešna
+// DB CONNECTIVITY CHECK
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
