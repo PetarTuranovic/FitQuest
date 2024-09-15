@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const addExerciseButton = document.getElementById("add-exercise");
   const exerciseList = document.getElementById("exercise-list");
+  const form = document.getElementById("training-form");
+  const messageDiv = document.getElementById("message");
 
   function createExerciseItem() {
     const listItem = document.createElement("li");
@@ -72,9 +74,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
   addExerciseButton.addEventListener("click", function () {
     const newExerciseItem = createExerciseItem();
+    const resultMessage = document.getElementById("result-message");
     exerciseList.appendChild(newExerciseItem);
   });
+});
 
+document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("training-form");
-  const resultMessage = document.getElementById("result-message");
+  const messageDiv = document.getElementById("message");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(form);
+
+    fetch("save_training.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        messageDiv.innerHTML = "Training finished successfully!"; // Display the success message
+        form.reset(); // Reset the form after successful submission
+      })
+      .catch((error) => {
+        messageDiv.innerHTML =
+          "An error occurred while saving the training. Please try again."; // Display error message
+      });
+  });
 });

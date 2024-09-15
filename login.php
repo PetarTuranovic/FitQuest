@@ -28,23 +28,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // PASSWORD CHECK
         if (password_verify($pass, $row['password'])) {
             $_SESSION['username'] = $user; // STORING USERNAME IN SESSION
+            $_SESSION['userid'] = $row['userid'];
             header("Location: index.php"); // REDIRECT TO index.php
             exit();
         } else {
-            echo "Invalid password!";
+            $message = "Invalid password!";
         }
     } else {
-        echo "No user found!";
+        $message = "No user found!";
     }
 }
 $conn->close();
 ?>
 
 <!-- HTML LOGIN FORM -->
-<form method="POST" action="login.php">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" required><br><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
-    <button type="submit">Login</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log in</title>
+    <link rel="stylesheet" href="css/login.css" />
+</head>
+
+<body>
+
+    <header>
+        <h1><span class="fit">Fit</span><span class="quest">Quest</span></h1>
+    </header>
+    <form method="POST" action="login.php">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <a href="register.php" class="signup-link"><span>Sign up</span></a>
+        <button type="submit">Login</button>
+    </form>
+    <?php if (!empty($message)): ?>
+        <div class="message">
+            <?php echo $message; ?>
+        </div>
+    <?php endif; ?>
+</body>
+
+</html>

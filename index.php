@@ -133,7 +133,7 @@ if (!isset($_SESSION['username'])) {
 
   <!-- START TRAINING SECTION -->
   <section class="formwrap">
-    <form id="training-form" method="POST" action="save_training.php">
+    <form id="training-form" method="POST">
       <h2>Training Tracker</h2>
 
       <!-- Training type -->
@@ -179,7 +179,8 @@ if (!isset($_SESSION['username'])) {
 
       <!-- Submit -->
       <button type="submit" id="finish">Finish training</button>
-    </form>>
+    </form>
+    <div id="message" class="message"></div>
 
   </section>
   <script src="js/script.js"></script>
