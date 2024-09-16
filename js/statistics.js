@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector("form").addEventListener("submit", function (e) {
+  const filterForm = document.getElementById("filter-form");
+
+  filterForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const month = document.querySelector("#month").value;

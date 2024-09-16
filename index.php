@@ -76,10 +76,10 @@ if (!isset($_SESSION['username'])) {
 
   <div class="why-us-wrapper" id="about">
     <section class="why-us-section">
-      <h2 class="why-us-title">Why <span class="highlight">Us?</span></h2>
+      <h2 class="why-us-title">About <span class="highlight">Us</span></h2>
       <ul class="why-us-list">
         <li>
-          <h3 class="list-title">Personalized Training Programs</h3>
+          <h3 class="why-list-title">Personalized Training Programs</h3>
           <p>
             We believe in a tailored approach to fitness. Our expert trainers
             create customized workout plans that match your goals, fitness
@@ -88,7 +88,7 @@ if (!isset($_SESSION['username'])) {
           </p>
         </li>
         <li>
-          <h3 class="list-title">Certified Experts</h3>
+          <h3 class="why-list-title">Certified Experts</h3>
           <p>
             Our team consists of certified trainers and nutrition specialists
             with years of experience. They’re not just knowledgeable—they’re
@@ -96,7 +96,7 @@ if (!isset($_SESSION['username'])) {
           </p>
         </li>
         <li>
-          <h3 class="list-title">State-of-the-Art Facilities</h3>
+          <h3 class="why-list-title">State-of-the-Art Facilities</h3>
           <p>
             Train in our modern, fully equipped gym with the latest fitness
             technology and equipment. Our clean, spacious environment is
@@ -104,7 +104,7 @@ if (!isset($_SESSION['username'])) {
           </p>
         </li>
         <li>
-          <h3 class="list-title">Supportive Community</h3>
+          <h3 class="why-list-title">Supportive Community</h3>
           <p>
             Join a welcoming community that encourages and supports you every
             step of the way. We foster a positive atmosphere where you can
@@ -112,7 +112,7 @@ if (!isset($_SESSION['username'])) {
           </p>
         </li>
         <li>
-          <h3 class="list-title">Holistic Approach</h3>
+          <h3 class="why-list-title">Holistic Approach</h3>
           <p>
             Fitness is more than just exercise; it’s about overall well-being.
             We offer guidance on nutrition, recovery, and mental wellness to
@@ -120,7 +120,7 @@ if (!isset($_SESSION['username'])) {
           </p>
         </li>
         <li>
-          <h3 class="list-title">Proven Results</h3>
+          <h3 class="why-list-title">Proven Results</h3>
           <p>
             Our clients’ success stories speak for themselves. We’ve helped
             countless individuals transform their bodies and lives through our
@@ -133,53 +133,56 @@ if (!isset($_SESSION['username'])) {
 
   <!-- START TRAINING SECTION -->
   <section class="formwrap">
-    <form id="training-form" method="POST">
-      <h2>Training Tracker</h2>
+    <div class="training-form-wrap">
 
-      <!-- Training type -->
-      <select id="training-type" name="training_type" required>
-        <option value="" disabled selected>Select training type</option>
-        <option value="cardio">Cardio</option>
-        <option value="strength">Strength</option>
-        <option value="flexibility">Flexibility</option>
-      </select>
+      <form id="training-form" method="POST">
+        <h2>Training <span>Tracker</span></h2>
 
-      <!-- Exercise list (dinamički ćeš dodavati vežbe putem JS) -->
-      <ul id="exercise-list"></ul>
+        <!-- Training type -->
+        <select id="training-type" name="training_type" required>
+          <option value="" disabled selected>Select training type</option>
+          <option value="cardio">Cardio</option>
+          <option value="strength">Strength</option>
+          <option value="flexibility">Flexibility</option>
+        </select>
 
-      <!-- New exercise button -->
-      <button type="button" id="add-exercise">Add new exercise</button>
+        <!-- Exercise list (dinamički ćeš dodavati vežbe putem JS) -->
+        <ul id="exercise-list"></ul>
 
-      <!-- Fatigue slider -->
-      <p class="input-title">Fatigue (1-10):</p>
-      <input type="range" id="fatigue" name="fatigue" min="1" max="10" value="5" />
-      <div class="slider-labels">
-        <span>1</span><span>2</span><span>3</span><span>4</span>
-        <span>5</span><span>6</span><span>7</span><span>8</span>
-        <span>9</span><span>10</span>
-      </div>
+        <!-- New exercise button -->
+        <button type="button" id="add-exercise">Add new exercise</button>
 
-      <!-- Other inputs -->
-      <input
-        type="number"
-        id="duration"
-        name="duration"
-        min="1"
-        required
-        placeholder="Training duration (minutes)" />
-      <input
-        type="number"
-        id="weight"
-        name="start_weight"
-        min="0"
-        step="0.1"
-        required
-        placeholder="Starting weight (kg)" />
-      <input type="datetime-local" id="date-time" name="training_date" required />
+        <!-- Fatigue slider -->
+        <p class="input-title">Fatigue (1-10):</p>
+        <input type="range" id="fatigue" name="fatigue" min="1" max="10" value="5" />
+        <div class="slider-labels">
+          <span>1</span><span>2</span><span>3</span><span>4</span>
+          <span>5</span><span>6</span><span>7</span><span>8</span>
+          <span>9</span><span>10</span>
+        </div>
 
-      <!-- Submit -->
-      <button type="submit" id="finish">Finish training</button>
-    </form>
+        <!-- Other inputs -->
+        <input
+          type="number"
+          id="duration"
+          name="duration"
+          min="1"
+          required
+          placeholder="Training duration (minutes)" />
+        <input
+          type="number"
+          id="weight"
+          name="start_weight"
+          min="0"
+          step="0.1"
+          required
+          placeholder="Starting weight (kg)" />
+        <input type="datetime-local" id="date-time" name="training_date" required />
+
+        <!-- Submit -->
+        <button type="submit" id="finish">Finish training</button>
+      </form>
+    </div>
     <div id="message" class="message"></div>
 
   </section>
@@ -217,21 +220,19 @@ if (!isset($_SESSION['username'])) {
   </section>
 
   <!-- Section for Displaying Data -->
-  <section id="training-data" class="training-data">
-    <?php if (!empty($training_data)): ?>
-      <section class="training-data">
-        <h2>Training Data for <?php echo htmlspecialchars($month) . '/' . htmlspecialchars($year); ?></h2>
-        <?php foreach ($training_data as $week => $exercises): ?>
-          <h3>Week <?php echo htmlspecialchars($week); ?></h3>
-          <ul>
-            <?php foreach ($exercises as $type => $total_reps): ?>
-              <li><?php echo htmlspecialchars($type); ?>: <?php echo htmlspecialchars($total_reps); ?> reps</li>
-            <?php endforeach; ?>
-          </ul>
-        <?php endforeach; ?>
-      </section>
-    <?php endif; ?>
-  </section>
+  <?php if (!empty($training_data)): ?>
+    <section class="training-data">
+      <h2>Training Data for <?php echo htmlspecialchars($month) . '/' . htmlspecialchars($year); ?></h2>
+      <?php foreach ($training_data as $week => $exercises): ?>
+        <h3>Week <?php echo htmlspecialchars($week); ?></h3>
+        <ul>
+          <?php foreach ($exercises as $type => $total_reps): ?>
+            <li><?php echo htmlspecialchars($type); ?>: <?php echo htmlspecialchars($total_reps); ?> reps</li>
+          <?php endforeach; ?>
+        </ul>
+      <?php endforeach; ?>
+    </section>
+  <?php endif; ?>
 
 
   <script src="js/script.js"></script>
