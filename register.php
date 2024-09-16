@@ -1,16 +1,5 @@
 <?php
-// DB CONNECTION
-$host = 'localhost';
-$dbname = 'fitquest';
-$username = 'root';
-$password = '';
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// CONNECTION CHECK
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'db_connection.php';
 
 // POST METHOD CHECK
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

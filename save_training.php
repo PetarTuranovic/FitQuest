@@ -7,19 +7,7 @@ if (!isset($_SESSION['userid'])) {
     exit();
 }
 
-// DB CONNECTION
-$host = 'localhost';
-$dbname = 'fitquest';
-$username = 'root';
-$password = '';
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// DB CONNECTION CHECK
-if ($conn->connect_error) {
-    echo "Connection failed: " . $conn->connect_error;
-    exit();
-}
+require 'db_connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['userid'];
