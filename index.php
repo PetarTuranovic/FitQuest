@@ -220,8 +220,8 @@ if (!isset($_SESSION['username'])) {
   </section>
 
   <!-- Section for Displaying Data -->
-  <?php if (!empty($training_data)): ?>
-    <section class="training-data">
+  <section class="training-data">
+    <?php if (!empty($training_data)): ?>
       <h2>Training Data for <?php echo htmlspecialchars($month) . '/' . htmlspecialchars($year); ?></h2>
       <?php foreach ($training_data as $week => $exercises): ?>
         <h3>Week <?php echo htmlspecialchars($week); ?></h3>
@@ -231,8 +231,8 @@ if (!isset($_SESSION['username'])) {
           <?php endforeach; ?>
         </ul>
       <?php endforeach; ?>
-    </section>
-  <?php endif; ?>
+    <?php endif; ?>
+  </section>
 
 
   <script src="js/script.js"></script>
