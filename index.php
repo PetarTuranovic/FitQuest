@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
   <!-- HEADER -->
   <header>
     <a href="#home" class="logo"> Fit <span>Quest</span> </a>
-    <div class="bx bx-menu" id="menu-icon"></div>
+
     <ul class="navbar">
       <li>
         <a href="#home">Home</a>
@@ -44,10 +44,10 @@ if (!isset($_SESSION['username'])) {
     <!-- AVATAR -->
 
     <div class="user-avatar">
-      <img src="imgs/avatar.jpg" alt="Avatar korisnika" class="avatar-img" />
-
       <div class="dropdown-menu">
         <button class="dropdown-toggle">
+          <img src="imgs/avatar.jpg" alt="Avatar korisnika" class="avatar-img" />
+
           <span class="user-name"><?php echo $_SESSION['username']; ?></span>
         </button>
         <ul class="menu">
@@ -221,6 +221,7 @@ if (!isset($_SESSION['username'])) {
 
   <!-- Section for Displaying Data -->
   <section class="training-data">
+
     <?php if (!empty($training_data)): ?>
       <h2>Training Data for <?php echo htmlspecialchars($month) . '/' . htmlspecialchars($year); ?></h2>
       <?php foreach ($training_data as $week => $exercises): ?>
@@ -232,6 +233,7 @@ if (!isset($_SESSION['username'])) {
         </ul>
       <?php endforeach; ?>
     <?php endif; ?>
+
   </section>
 
 

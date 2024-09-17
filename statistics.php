@@ -40,12 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Generate HTML for results
     if (!empty($training_data)) {
         foreach ($training_data as $week => $exercises) {
+            echo '<div class="item">';
             echo "<h3>Week " . htmlspecialchars($week) . "</h3>";
             echo "<ul>";
             foreach ($exercises as $type => $total_reps) {
                 echo "<li>" . htmlspecialchars($type) . ": " . htmlspecialchars($total_reps) . " reps</li>";
             }
             echo "</ul>";
+            echo "</div>";
         }
     } else {
         echo "<p>No training data found for the selected month and year.</p>";
