@@ -166,10 +166,12 @@ span {
 }
 
 .dropdown-toggle {
+  display: flex;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--main-color);
+  align-items: center;
 }
 
 .menu {
